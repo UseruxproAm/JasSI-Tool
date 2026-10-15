@@ -13,9 +13,10 @@ jobs:
           java-version: 17
       - name: Fetch llama.cpp + whisper.cpp
         run: bash scripts/fetch_native.sh
-      - uses: android-actions/setup-android@v3
       - name: SDK / NDK / CMake
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;27.2.12479018" "cmake;3.22.1"
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;27.2.12479018" "cmake;3.22.1"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.10.2
